@@ -39,6 +39,16 @@ app.get("/todo/:id", (req, res) => {
   res.json(todo);
 });
 
+app.post("/todos", (req, res) => {
+  const todo = {
+    id: todos.length + 1,
+    title: req.body.title,
+    completed: false,
+  };
+  todos.push(todo);
+  res.json(todo);
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
