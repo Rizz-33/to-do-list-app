@@ -27,6 +27,10 @@ app.get("/", (req, res) => {
   res.json({ msg: "To-Do List" });
 });
 
+app.get("/todos", (req, res) => {
+  res.json(todos);
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
