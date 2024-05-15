@@ -37,6 +37,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  async function deleteTodo(todoElement) {
+    try {
+      const del_url = URL + "/" + todoElement.id;
+      console.log(del_url);
+      const options = {
+        method: "DELETE",
+      };
+      const resp = await fetch(del_url, options);
+      const data = await resp.json();
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+
   function displayTodos(todoArray) {
     todoArray.forEach((todoElement) => {
       console.log(todoElement);
@@ -79,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
       todoDelete.addEventListener("click", (e) => {
         e.preventDefault();
         console.log("Delete Todo");
+        deleteTodo(todoElement);
       });
 
       todoInfo.appendChild(todoCompleted);
