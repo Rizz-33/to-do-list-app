@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const uuid = require("uuid");
 
 const PORT = 3000;
 
@@ -41,13 +42,8 @@ app.get("/todos/:id", (req, res) => {
 
 //add todo
 app.post("/todos", (req, res) => {
-  const todo = {
-    id: todos.length + 1,
-    title: req.body.title,
-    completed: false,
-  };
-  todos.push(todo);
-  res.json(todos);
+  todos.push({ id: uuid.v4(), ...req.body });
+  res.json({ data: todos });
 });
 
 //update todo
