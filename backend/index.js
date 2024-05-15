@@ -9,10 +9,10 @@ const PORT = 3000;
 const connectionString =
   "mongodb+srv://aarruwanthie:12$45$78@cluster0.ffhhoj8.mongodb.net/TodoList?retryWrites=true&w=majority&appName=Cluster0";
 
-mongoose
-  .connect(connectionString)
-  .then(() => console.log("Connected to DB"))
-  .catch((err) => console.log(err));
+// mongoose
+//   .connect(connectionString)
+//   .then(() => console.log("Connected to DB"))
+//   .catch((err) => console.log(err));
 
 app.use(express.json());
 app.use(cors());
@@ -58,6 +58,18 @@ app.delete("/todos/:id", (req, res) => {
   res.json({ data: todos });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+function connectDB(url) {
+  return mongoose.connect(url);
+}
+async function start() {
+  try {
+    await connectDB(connectionString);
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+start();
