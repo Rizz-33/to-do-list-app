@@ -48,13 +48,14 @@ app.post("/todos", (req, res) => {
 
 //update todo
 app.put("/todos/:id", (req, res) => {
-  const todo = todos.find((todo) => todo.id === parseInt(req.params.id));
-  if (!todo) {
-    return res.status(404).json({ msg: "Todo not found" });
+  let todo = todos.find((todo) => todo.id === req.params.id);
+  if (todo) {
+    todo.title = req.body.title;
+    todo.completed = req.body.completed;
+    res.json({ data: todos });
+  } else {
+    res.json({ msg: "Todo not found" });
   }
-  todo.title = req.body.title;
-  todo.completed = req.body.completed;
-  res.json(todo);
 });
 
 //delete todo
