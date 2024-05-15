@@ -1,0 +1,77 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e1f4fa;
+  margin: 0;
+  padding: 0;
+}
+
+.topic-todo {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.input-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#input-todo {
+  padding: 10px;
+  width: 300px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.add-todo {
+  margin-left: 10px;
+}
+
+.add-todo img {
+  cursor: pointer;
+}
+
+.add-todo:hover img {
+  filter: brightness(0.8);
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+.todo {
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding: 16px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex; /* Make todo items flex containers */
+  align-items: center; /* Align items vertically */
+}
+
+.todo-p {
+  margin: 0;
+  flex-grow: 1;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.actions input[type="checkbox"] {
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.actions a img {
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.actions a:hover img {
+  filter: brightness(0.8);
+}
