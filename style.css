@@ -67,6 +67,11 @@ body {
   flex-shrink: 0;
 }
 
+.actions input[type="checkbox"]:checked + .todo-p {
+  text-decoration: line-through;
+  color: #888;
+}
+
 .actions a img {
   cursor: pointer;
   flex-shrink: 0;
