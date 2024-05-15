@@ -44,6 +44,7 @@ app.get("/todos/:id", (req, res) => {
 
 //add todo
 app.post("/todos", (req, res) => {
+  console.log(req.body);
   todos.push({ id: uuid.v4(), ...req.body });
   res.json({ data: todos });
 });
