@@ -34,12 +34,9 @@ app.get("/todos", (req, res) => {
 });
 
 //get only one todo by id
-app.get("/todo/:id", (req, res) => {
-  const todo = todos.find((todo) => todo.id === parseInt(req.params.id));
-  if (!todo) {
-    return res.status(404).json({ msg: "Todo not found" });
-  }
-  res.json(todo);
+app.get("/todos/:id", (req, res) => {
+  let todo = todos.filter((todo) => todo.id === parseInt(req.params.id));
+  res.json({ data: todo });
 });
 
 //add todo
@@ -50,7 +47,7 @@ app.post("/todos", (req, res) => {
     completed: false,
   };
   todos.push(todo);
-  res.json(todo);
+  res.json(todos);
 });
 
 //update todo
