@@ -3,6 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputTodo = document.getElementById("input-todo");
   const addTodo = document.querySelector(".add-todo");
 
+  const modelBackground = document.querySelector(".model-background");
+  const closeModel = document.querySelector("#close-model");
+  const editTodoTitle = document.getElementById("edit-todo-title");
+  const editTodoCompleted = document.getElementById("edit-todo-completed");
+  const saveTodo = document.getElementById("save-todo");
+
   let todoArray = [];
 
   const URL = "http://localhost:3000/todos";
@@ -52,6 +58,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  async function editTodo(todoElement) {
+    try {
+      let edit_url = URL + "/" + todoElement.id;
+      let options = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: todoElement.id,
+          title: editTodoTitle.value,
+          completed: editTodoCompleted.checked,
+        }),
+      };
+      const resp = await fetch(edit_url, options);
+      const data = await resp.json();
+      return data;
+    } catch (error) {
+      return error.message;
+    }
+  }
+
+  function open_model(todoElement) {
+    editTodoTitle.value = todoElement.title;
+    editTodoCompleted.checked = todoElement.completed;
+    modelBackground.style.display = "block";
+    closeModel.addEventListener("click", () => {
+      modelBackground.style.display = "none";
+    });
+    saveTodo.addEventListener("click", () => {
+      modelBackground.style.display = "none";
+      editTodo(todoElement);
+    });
+  }
+
   function displayTodos(todoArray) {
     todoArray.forEach((todoElement) => {
       console.log(todoElement);
@@ -82,6 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
       todoEdit.addEventListener("click", (e) => {
         e.preventDefault();
         console.log("Open Model");
+        open_model(todoElement);
       });
 
       let todoDelete = document.createElement("a");
