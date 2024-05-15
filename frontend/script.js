@@ -90,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     saveTodo.addEventListener("click", () => {
       modelBackground.style.display = "none";
       editTodo(todoElement);
+      window.location.reload();
     });
   }
 
@@ -136,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
       todoDelete.addEventListener("click", (e) => {
         e.preventDefault();
         console.log("Delete Todo");
-        deleteTodo(todoElement);
+        deleteTodo(todoElement).then(() => window.location.reload());
       });
 
       todoInfo.appendChild(todoCompleted);
@@ -162,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
   addTodo.addEventListener("click", (e) => {
     e.preventDefault();
     if (inputTodo.value.trim() !== "") {
-      postTodo();
+      postTodo().then(() => window.location.reload());
     }
   });
 });
