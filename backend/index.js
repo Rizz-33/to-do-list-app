@@ -12,12 +12,12 @@ const todos = [
     completed: true,
   },
   {
-    id: 1,
+    id: 2,
     title: "Learn Golang",
     completed: false,
   },
   {
-    id: 1,
+    id: 3,
     title: "Learn   Django",
     completed: true,
   },
@@ -29,6 +29,14 @@ app.get("/", (req, res) => {
 
 app.get("/todos", (req, res) => {
   res.json(todos);
+});
+
+app.get("/todo/:id", (req, res) => {
+  const todo = todos.find((todo) => todo.id === parseInt(req.params.id));
+  if (!todo) {
+    return res.status(404).json({ msg: "Todo not found" });
+  }
+  res.json(todo);
 });
 
 app.listen(PORT, () => {
